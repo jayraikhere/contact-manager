@@ -5,7 +5,10 @@ import {Header} from './MyComponent/Header'
 import AddContact from './MyComponent/AddContact'
 import ContactList from './MyComponent/ContactList'
 import { uuid } from 'uuidv4';
+import { BrowserRouter as Router , Switch, Route} from 'react-router-dom'
+import ContactDetail from './MyComponent/ContactDetail';
 
+// import Search from './MyComponent/Search';
 
 
 function App() {
@@ -61,9 +64,37 @@ function App() {
 <>
 
     <div>
-      <Header/>
-      <AddContact addConatactHandler={addConatactHandler}/>
-      <ContactList contacts={contacts} getContactId={removeContactHandler}/>
+      <Router>
+
+        <Header/>
+        <Switch>
+
+        {/* <Route exact path="/" component={()=>(<ContactList contacts={contacts} getContactId={removeContactHandler}/>)}/> */}
+
+    <Route
+    exact 
+    path='/'
+    render={(props)=>(<ContactList {...props} contacts={contacts} getContactId={removeContactHandler}/>)}>
+
+    </Route>
+
+    <Route
+    exact 
+    path="/add"
+    render={(props)=>(<AddContact {...props} addConatactHandler={addConatactHandler}/>)}>
+
+    </Route>
+
+        {/* <Route path="/add" component={()=>(<AddContact addConatactHandler={addConatactHandler}/>)}/> */}
+        {/* <AddContact addConatactHandler={addConatactHandler}/>
+        <ContactList contacts={contacts} getContactId={removeContactHandler}/> */}
+
+        <Route
+        path="/contact/:id" component={ContactDetail}></Route>
+
+        </Switch>
+      </Router>
+
     </div>
 </>
   );

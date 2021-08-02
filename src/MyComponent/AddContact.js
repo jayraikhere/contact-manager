@@ -4,7 +4,7 @@ export default class AddContact extends Component {
 
     state = {
         name: '',
-        email: '',
+        email: '', 
     }
 
     add= (e)=>{
@@ -16,6 +16,7 @@ export default class AddContact extends Component {
         this.props.addConatactHandler(this.state);
         // console.log(this.state); 
         this.setState({name:'',email:''});
+        this.props.history.push='/';
     }
 
 
